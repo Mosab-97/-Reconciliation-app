@@ -13,7 +13,8 @@ export async function parsePDFReceipt(buffer: Buffer): Promise<ParsedReceipt> {
       throw new Error('Empty PDF file');
     }
     
-    const data = await pdfParse(buffer);
+    // Fix: Call pdfParse.default instead of pdfParse directly
+    const data = await pdfParse.default(buffer);
     const text = data.text;
     
     if (!text || text.trim().length === 0) {
@@ -95,3 +96,4 @@ function extractDescription(text: string): string {
     
   return lines.slice(0, 3).join(' ') || 'Receipt transaction';
 }
+
