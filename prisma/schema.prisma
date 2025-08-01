@@ -7,8 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Dummy {
-  id    Int    @id @default(autoincrement())
-  name  String
+model Ledger {
+  id          Int      @id @default(autoincrement())
+  amount      Float
+  description String
+  createdAt   DateTime @default(now())
+}
+
+model BankTransaction {
+  id          Int      @id @default(autoincrement())
+  amount      Float
+  vendor      String
+  description String
+  date        DateTime
+  createdAt   DateTime @default(now())
+}
+
+model MatchResult {
+  id                Int      @id @default(autoincrement())
+  ledgerId          Int?     
+  bankTransactionId Int?
+  status            String
+  fuzzyScore        Float?
+  createdAt         DateTime @default(now())
 }
 
