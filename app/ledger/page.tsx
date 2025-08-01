@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import LedgerTable from '@/components/LedgerTable';
-import { Button } from '@/components/ui/button';
+import LedgerTable from '@/app/components/LedgerTable';
+import { Button } from '@/app/components/ui/button';
 import Link from 'next/link';
 import { Plus, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
