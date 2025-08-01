@@ -1,4 +1,4 @@
-const path = require('path');
+ const path = require('path');
 
 module.exports = {
   webpack(config) {
@@ -6,4 +6,3 @@ module.exports = {
     return config;
   },
 };
-
