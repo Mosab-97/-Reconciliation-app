@@ -1,4 +1,4 @@
- {
+{
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -13,9 +13,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",                    
+    "baseUrl": ".",                         // Base directory is project root
     "paths": {
-      "@/*": ["./*"]                
+      "@/*": ["./*"]                       // Map @/ to project root
     },
     "plugins": [
       {
