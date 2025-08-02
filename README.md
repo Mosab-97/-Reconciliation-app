@@ -36,4 +36,53 @@ Uses fuzzy string matching on vendor/description
 
 Provides match confidence scores
 
+
+
+##  How to Run Locally
+
+Anyone can test this app locally in under 5 minutes:
+
+### 1️ Prerequisites
+
+- [Node.js](https://nodejs.org) (v18+)
+- npm (or yarn)
+
+### 2 Clone the Repository
+
+## bash
+git clone https://github.com/Mosab-97/-Reconciliation-app.git
+cd -Reconciliation-app
+3️ Install Dependencies
+bash
+Copy
+Edit
+npm install
+4️ Set Up the Database
+Use the built-in SQLite database for local development:
+
+bash
+Copy
+Edit
+npx prisma migrate dev --name init
+(Optionally run npx prisma studio to view/edit the DB in a browser UI)
+
+5️ Start the App
+bash
+Copy
+Edit
+npm run dev
+Open your browser:
+http://localhost:3000
+
+
+## Production Deployment Notes
+The app is Vercel-ready
+
+You’ll need to connect a hosted PostgreSQL DB (e.g., Supabase, PlanetScale)
+
+DATABASE_URL must be added to .env for production
+
+
+
+
 Author: Mosab Mohamed
