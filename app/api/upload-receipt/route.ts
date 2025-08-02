@@ -6,27 +6,9 @@ import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';
 
-async function testDatabaseConnection(): Promise<boolean> {
-  try {
-    await prisma.$connect();
-    return true;
-  } catch (error) {
-    console.error('❌ DB connection failed:', error);
-    return false;
-  }
-}
-
 export async function POST(request: NextRequest) {
   try {
     console.log('🟢 Upload receipt API called');
-
-    const isConnected = await testDatabaseConnection();
-    if (!isConnected) {
-      return NextResponse.json(
-        { error: 'Database connection failed. Please check your configuration.' },
-        { status: 500 }
-      );
-    }
 
     const formData = await request.formData();
     const file = formData.get('file');
@@ -45,13 +27,13 @@ export async function POST(request: NextRequest) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Parse PDF (mock or real implementation)
+    // Parse the PDF receipt
     const parsedReceipt = await parsePDFReceipt(buffer);
 
-    // Validate parsed data
+    // Validate the parsed data
     const validatedData = uploadReceiptSchema.parse(parsedReceipt);
 
-    // Save to DB
+    // Save to database
     const ledgerEntry = await prisma.ledger.create({
       data: {
         vendor: validatedData.vendor,
@@ -79,16 +61,6 @@ export async function POST(request: NextRequest) {
         error: 'Validation error',
         details: error.errors,
       }, { status: 400 });
-    }
-
-    if (error.code === 'P2002') {
-      return NextResponse.json({ error: 'Duplicate entry detected.' }, { status: 409 });
-    }
-
-    if (error.code === 'P1001') {
-      return NextResponse.json({
-        error: 'Cannot connect to database. Check your configuration.',
-      }, { status: 500 });
     }
 
     return NextResponse.json(

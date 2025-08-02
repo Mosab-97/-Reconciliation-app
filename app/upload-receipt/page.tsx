@@ -51,9 +51,7 @@ export default function UploadReceiptPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Upload Receipt
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">Upload Receipt</h1>
         <p className="text-lg text-gray-600">
           Upload a PDF receipt to automatically extract transaction details
         </p>
@@ -73,7 +71,9 @@ export default function UploadReceiptPage() {
           <Card>
             <CardHeader className="text-center">
               <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <CardTitle className="text-green-900">Receipt Processed Successfully!</CardTitle>
+              <CardTitle className="text-green-900">
+                Receipt Processed Successfully!
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-4">
@@ -137,3 +137,4 @@ export default function UploadReceiptPage() {
     </div>
   );
 }
+

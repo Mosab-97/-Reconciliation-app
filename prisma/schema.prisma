@@ -1,34 +1,41 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
-
 model Ledger {
   id          Int      @id @default(autoincrement())
+  vendor      String
   amount      Float
+  date        DateTime
   description String
   createdAt   DateTime @default(now())
 }
 
+
 model BankTransaction {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(cuid())
   amount      Float
-  vendor      String
-  description String
   date        DateTime
-  createdAt   DateTime @default(now())
+  description String
+  source      String   @default("Bank Import")
+  createdAt   DateTime @default(now()) @map("created_at")
+  
+  matchResults MatchResult[]
+  
+  @@map("bank_transactions")
 }
 
 model MatchResult {
-  id                Int      @id @default(autoincrement())
-  ledgerId          Int?     
-  bankTransactionId Int?
-  status            String
-  fuzzyScore        Float?
-  createdAt         DateTime @default(now())
+  id                 String   @id @default(cuid())
+  ledgerId           String?  @map("ledger_id")
+  bankTransactionId  String?  @map("bank_transaction_id")
+  status             String
+  fuzzyScore         Float?   @map("fuzzy_score")
+  createdAt          DateTime @default(now()) @map("created_at")
+
+  ledger             Ledger?          @relation(fields: [ledgerId], references: [id], onDelete: Cascade)
+  bankTransaction    BankTransaction? @relation(fields: [bankTransactionId], references: [id], onDelete: Cascade)
+  
+  @@map("match_results")
 }
 

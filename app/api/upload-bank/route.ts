@@ -1,6 +1,8 @@
+export const runtime = "nodejs";
+
 import { NextRequest, NextResponse } from "next/server";
 import { parse } from "csv-parse/sync";
-import { prisma } from "@/lib/prisma";  // Use named import here
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,6 +14,7 @@ export async function POST(req: NextRequest) {
     }
 
     const text = await file.text();
+
     const records = parse(text, {
       columns: true,
       skip_empty_lines: true,

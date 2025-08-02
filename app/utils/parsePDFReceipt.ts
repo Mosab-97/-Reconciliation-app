@@ -1,17 +1,10 @@
-type ParsedReceipt = {
-  vendor: string;
-  amount: number;
-  date: Date;
-  description: string;
-};
-
-export async function parsePDFReceipt(buffer: Buffer): Promise<ParsedReceipt> {
-  // Simulate parsing logic — replace with real PDF parsing later
+export async function parsePDFReceipt(buffer: Buffer) {
+  // Simulate PDF parsing
   return {
-    vendor: 'Test Vendor',
-    amount: 123.45,
+    vendor: 'Mock Vendor',
+    amount: 99.99,
     date: new Date('2025-08-01'),
-    description: 'Sample receipt description',
+    description: 'Mock receipt description from PDF',
   };
 }
 

@@ -53,8 +53,8 @@ export async function POST() {
       if (matchResults.length > 0) {
         await tx.matchResult.createMany({
           data: matchResults.map(result => ({
-            ledgerId: result.ledgerId ? parseInt(result.ledgerId) : null,
-            bankTransactionId: result.bankTransactionId ? parseInt(result.bankTransactionId) : null,
+            ledgerId: result.ledgerId ? Number(result.ledgerId) : null,
+            bankTransactionId: result.bankTransactionId ? Number(result.bankTransactionId) : null,
             status: result.status,
             fuzzyScore: result.fuzzyScore ?? null,
           })),
